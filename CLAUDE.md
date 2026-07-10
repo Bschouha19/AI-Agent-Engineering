@@ -324,8 +324,8 @@ Volume 3 repository: https://github.com/Bschouha19/RAG-Deep-Dive
 | # | Chapter | File | Status |
 |---|---------|------|--------|
 | 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | chapters/chapter-01-agent-architecture-deep-dive.md | ✅ Complete |
-| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | 🔜 Next |
-| 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | 🔜 |
+| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | ✅ Complete |
+| 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | 🔜 Next |
 | 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | 🔜 |
 | 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | 🔜 |
 | 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | 🔜 |
