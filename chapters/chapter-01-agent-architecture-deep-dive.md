@@ -1118,6 +1118,7 @@ This is exactly this chapter's worked example — deliberately, since it's a gen
 | Volume 2 (MCP Engineering) | The tool-serving side of exactly the tool-use problem this chapter consumes from the agent side |
 | Volume 3, Chapter 13 (Trustworthy RAG) | Source of the "treat retrieved/tool content as untrusted" discipline this chapter applies to tool-call injection |
 | Chapter 02 (Reasoning and Planning Patterns) | Goes deep on *how* the model reasons inside the loop this chapter only describes structurally |
+| Chapter 03 (Tool Use and Function Calling at Scale) | Extends this chapter's single-tool-use-failure taxonomy category and least-privilege discipline to many-tool, production-scale agents |
 | Chapter 04 (Agent Memory Systems) | Extends this chapter's small, in-task working memory into persistent memory across sessions |
 | Chapter 05 (Multi-Agent Orchestration) | Where coordination failure, only previewed in this chapter's taxonomy, becomes the primary subject |
 | Chapter 06 (Agent-to-Agent Protocol) | Where agent impersonation, only previewed here, gets a full identity-verification treatment on top of this chapter's Protocol interface |

@@ -13,7 +13,7 @@
 
 ## Progress
 
-**2 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11.
+**3 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11.
 
 ---
 
@@ -36,8 +36,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 |---|---------|------|--------|-----------|
 | 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | chapters/chapter-01-agent-architecture-deep-dive.md | ✅ Complete | Agent failure taxonomy, when agents are (and aren't) the right architecture, Protocol-based agent interfaces |
 | 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | ✅ Complete | Reasoning loop design, planning vs. reactive execution, self-critique/reflection passes |
-| 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | 🔜 Next | Agent-side tool selection, parallel tool calls, error recovery, result validation |
-| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | 🔜 | Short-term/working memory, long-term persistent memory, memory retrieval |
+| 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | ✅ Complete | Agent-side tool selection, parallel tool calls, error recovery, result validation |
+| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | 🔜 Next | Short-term/working memory, long-term persistent memory, memory retrieval |
 
 **Module 1 Learning Goal:** Understand exactly what separates a "chatbot with a tool" from a genuine autonomous agent, and build the reasoning, tool-use, and memory foundations everything else in this course depends on.
 
