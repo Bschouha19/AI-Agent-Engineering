@@ -13,7 +13,7 @@
 
 ## Progress
 
-**5 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11.
+**6 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11.
 
 ---
 
@@ -51,8 +51,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
 | 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | ✅ Complete | Supervisor/worker, hierarchical, and swarm topologies; when each is production-proven vs. experimental |
-| 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | 🔜 Next | A2A protocol fundamentals, MCP vs. A2A, agent discovery and identity |
-| 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | 🔜 | Graph/state-machine orchestration, production multi-agent workflows |
+| 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | ✅ Complete | A2A protocol fundamentals, MCP vs. A2A, agent discovery and identity |
+| 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | 🔜 Next | Graph/state-machine orchestration, production multi-agent workflows |
 | 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | 🔜 | Approval gates, human-in-the-loop vs. human-on-the-loop, escalation design |
 
 **Module 2 Learning Goal:** Coordinate multiple agents safely and effectively, understand the protocols purpose-built for agent-to-agent communication, and design the human-oversight layer that makes autonomy tolerable.
