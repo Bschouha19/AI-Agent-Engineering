@@ -59,11 +59,11 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 ## Progress
 
-**3 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11.
+**4 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11.
 
 | Module | Chapters | Status |
 |--------|----------|--------|
-| 1 — Agent Foundations, Deepened | Ch 01–04 | 🟡 In progress (3/4) |
+| 1 — Agent Foundations, Deepened | Ch 01–04 | ✅ Complete |
 | 2 — Multi-Agent Engineering | Ch 05–08 | 🔜 Not started |
 | 3 — Specialized and Production Agent Capabilities | Ch 09–11 | 🔜 Not started |
 | 4 — Trustworthy, Evaluated, Production-Grade Agents | Ch 12–14 | 🔜 Not started |

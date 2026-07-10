@@ -13,7 +13,7 @@
 
 ## Progress
 
-**3 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11.
+**4 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11.
 
 ---
 
@@ -37,7 +37,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | chapters/chapter-01-agent-architecture-deep-dive.md | ✅ Complete | Agent failure taxonomy, when agents are (and aren't) the right architecture, Protocol-based agent interfaces |
 | 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | ✅ Complete | Reasoning loop design, planning vs. reactive execution, self-critique/reflection passes |
 | 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | ✅ Complete | Agent-side tool selection, parallel tool calls, error recovery, result validation |
-| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | 🔜 Next | Short-term/working memory, long-term persistent memory, memory retrieval |
+| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | ✅ Complete | Short-term/working memory, long-term persistent memory, memory retrieval |
 
 **Module 1 Learning Goal:** Understand exactly what separates a "chatbot with a tool" from a genuine autonomous agent, and build the reasoning, tool-use, and memory foundations everything else in this course depends on.
 
@@ -50,7 +50,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
-| 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | 🔜 | Supervisor/worker, hierarchical, and swarm topologies; when each is production-proven vs. experimental |
+| 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | 🔜 Next | Supervisor/worker, hierarchical, and swarm topologies; when each is production-proven vs. experimental |
 | 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | 🔜 | A2A protocol fundamentals, MCP vs. A2A, agent discovery and identity |
 | 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | 🔜 | Graph/state-machine orchestration, production multi-agent workflows |
 | 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | 🔜 | Approval gates, human-in-the-loop vs. human-on-the-loop, escalation design |

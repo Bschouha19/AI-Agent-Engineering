@@ -990,6 +990,7 @@ Walking this through the chapter: the actual root cause wasn't any individual to
 | Chapter 02 (Reasoning and Planning Patterns) | The weekly-report Plan-and-Execute example this chapter's Intermediate Implementation directly extends and finally parallelizes |
 | Volume 2 (MCP Engineering) | The tool-serving side of this chapter's tool-consuming content, and the source of the OWASP MCP guidance behind this chapter's ambiguous-description security note |
 | Volume 3, Chapter 06 (Dense Retrieval) | The retrieval mechanism `search_tools` reuses conceptually for finding relevant tools instead of relevant documents |
+| Chapter 04 (Agent Memory Systems) | Applies this chapter's `search_tools` retrieval pattern to a different kind of content — past experiences instead of tool schemas |
 | Chapter 05 (Multi-Agent Orchestration) | Where shared circuit-breaker state and cross-agent tool governance become genuinely harder problems than this chapter's single-agent version |
 | Chapter 12 (Agent Evaluation) | Where BFCL sits alongside the end-to-end agent benchmarks as a tool-use-specific evaluation signal |
 | Chapter 13 (Agent Security) | Full treatment of malicious/near-duplicate tool registration and the injection risk this chapter's Security Considerations previewed |
