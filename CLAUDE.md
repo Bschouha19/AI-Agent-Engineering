@@ -329,8 +329,8 @@ Volume 3 repository: https://github.com/Bschouha19/RAG-Deep-Dive
 | 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | ✅ Complete |
 | 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | ✅ Complete |
 | 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | ✅ Complete |
-| 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | 🔜 Next |
-| 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | 🔜 |
+| 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | ✅ Complete |
+| 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | 🔜 Next |
 | 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | chapters/chapter-09-claude-agent-sdk.md | 🔜 |
 | 10 | Computer-Use and Browser Agents | chapters/chapter-10-computer-use-browser-agents.md | 🔜 |
 | 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | 🔜 |
