@@ -13,7 +13,7 @@
 
 ## Progress
 
-**0 of 15 chapters complete** — Volume 4 kicked off 2026-07-11.
+**1 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11.
 
 ---
 
@@ -34,8 +34,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
-| 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | chapters/chapter-01-agent-architecture-deep-dive.md | 🔜 Next | Agent failure taxonomy, when agents are (and aren't) the right architecture, Protocol-based agent interfaces |
-| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | 🔜 | Reasoning loop design, planning vs. reactive execution, self-critique/reflection passes |
+| 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | chapters/chapter-01-agent-architecture-deep-dive.md | ✅ Complete | Agent failure taxonomy, when agents are (and aren't) the right architecture, Protocol-based agent interfaces |
+| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | chapters/chapter-02-reasoning-planning-patterns.md | 🔜 Next | Reasoning loop design, planning vs. reactive execution, self-critique/reflection passes |
 | 03 | Tool Use and Function Calling at Scale | chapters/chapter-03-tool-use-at-scale.md | 🔜 | Agent-side tool selection, parallel tool calls, error recovery, result validation |
 | 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | chapters/chapter-04-agent-memory-systems.md | 🔜 | Short-term/working memory, long-term persistent memory, memory retrieval |
 
