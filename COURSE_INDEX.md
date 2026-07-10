@@ -13,7 +13,7 @@
 
 ## Progress
 
-**7 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11.
+**8 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11.
 
 ---
 
@@ -53,7 +53,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | 05 | Multi-Agent Orchestration Patterns | chapters/chapter-05-multi-agent-orchestration.md | ✅ Complete | Supervisor/worker, hierarchical, and swarm topologies; when each is production-proven vs. experimental |
 | 06 | Agent-to-Agent Communication and the A2A Protocol | chapters/chapter-06-agent-to-agent-protocol.md | ✅ Complete | A2A protocol fundamentals, MCP vs. A2A, agent discovery and identity |
 | 07 | Building Multi-Agent Systems with LangGraph | chapters/chapter-07-langgraph-multi-agent.md | ✅ Complete | Graph/state-machine orchestration, production multi-agent workflows |
-| 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | 🔜 Next | Approval gates, human-in-the-loop vs. human-on-the-loop, escalation design |
+| 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | ✅ Complete | Approval gates, human-in-the-loop vs. human-on-the-loop, escalation design |
 
 **Module 2 Learning Goal:** Coordinate multiple agents safely and effectively, understand the protocols purpose-built for agent-to-agent communication, and design the human-oversight layer that makes autonomy tolerable.
 
@@ -66,7 +66,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
-| 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | chapters/chapter-09-claude-agent-sdk.md | 🔜 | Subagent delegation, hook-based control, permission modes, Skills |
+| 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | chapters/chapter-09-claude-agent-sdk.md | 🔜 Next | Subagent delegation, hook-based control, permission modes, Skills |
 | 10 | Computer-Use and Browser Agents | chapters/chapter-10-computer-use-browser-agents.md | 🔜 | Browser automation agents, visual UI interpretation, real-world action risk |
 | 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | 🔜 | Retrieval as an agent tool, bounded retrieval loops, connecting Volume 3's retrieval stack to agent reasoning |
 
