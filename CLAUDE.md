@@ -51,11 +51,17 @@ If improvements are required: update the chapter FIRST. Do not rewrite unnecessa
 
 Review `COURSE_INDEX.md`. If a better learning order exists, update it. Only make changes when there is a clear educational improvement.
 
-### Step 3 — Generate ONE Chapter ONLY
+### Step 3 — Research Before Writing
 
-Generate exactly ONE new chapter. Never generate multiple chapters. Never skip chapters. Never jump ahead. The chapter must be completely finished before it is considered done.
+Before drafting a single word of the new chapter, run a dedicated research pass covering every fast-moving fact this chapter will need (see "Information Accuracy" below for the specific list — framework versions and APIs, protocol spec status, benchmark currency, named security standards, any claimed incident or case study). Use WebSearch/WebFetch against current official documentation, current GitHub repository state, or current leaderboards — never write a specific version number, API signature, or "current best practice" claim from memory alone.
 
-### Step 4 — Chapter Completion Checklist
+If research tooling is unavailable or rate-limited: do not silently substitute training-data recall and present it as current. Record exactly what could and could not be verified (mirroring the pattern in this repository's own `ROADMAP.md` Kickoff Research Summary), and either delay the affected section or write it with an explicit, visible hedge. Never let an unverified claim reach the page looking like a confirmed fact.
+
+### Step 4 — Generate ONE Chapter ONLY
+
+Generate exactly ONE new chapter, grounded in Step 3's research. Never generate multiple chapters. Never skip chapters. Never jump ahead. The chapter must be completely finished before it is considered done.
+
+### Step 5 — Chapter Completion Checklist
 
 A chapter is NOT complete until it contains ALL required sections and appropriate optional sections.
 
@@ -128,15 +134,26 @@ Format:
 - **Real Client Scenario** — a fictional but realistic business problem requiring this chapter's concepts. From Chapter 09 onward, prefer scenarios where an agent's autonomy has real, escalating consequences — see "The Autonomy Thread" below
 - **Currency Note** — when content reflects a fast-moving detail (a specific framework's current API, a protocol's current spec version, a benchmark's current leaderboard), explain clearly what is stable vs likely to change
 
-### Step 5 — Cross References
+### Step 6 — Verify Technical Accuracy
+
+Before treating the chapter as done, verify it — do not just proofread it:
+- **Run every runnable code example** (or the smallest faithful excerpt of it) and confirm it actually produces the behavior the prose claims, exactly the way earlier volumes caught real bugs this way (e.g., a router's own example query not matching its own classification logic). Fix any bug found before moving on — do not narrate a fix without applying it.
+- **Re-check every fast-moving fact from Step 3's research** against what actually got written — a number, API name, or claim that drifted during drafting is a common, easy-to-miss failure mode.
+- **Confirm every internal cross-reference** (a class name, a Protocol, a prior chapter's concept) actually matches what that earlier chapter built, not a paraphrase of it.
+
+### Step 7 — Cross References
 
 After finishing the chapter, review whether previous chapters should reference this new chapter. If appropriate, add "See Also" entries to previous chapters.
 
-### Step 6 — Update COURSE_INDEX.md
+### Step 8 — Update COURSE_INDEX.md
 
-Mark the new chapter as complete. Update the progress tracker.
+Mark the new chapter as complete. Update the progress tracker (`COURSE_INDEX.md`, `README.md`, and this file's Chapter Status table).
 
-### Step 7 — STOP
+### Step 9 — Commit and Push
+
+Once the chapter is written and verified, commit it (chapter file + any updated index/README/reference files) with a descriptive message, and push to the remote — before starting the next chapter, not batched up across several chapters. This is a durable, standing authorization for this specific, recurring action (commit + push one completed, verified chapter) in this repository; it does not authorize any other git operation (force-push, history rewrite, branch deletion) without separately asking first.
+
+### Step 10 — STOP
 
 After completing all work: STOP. Do not generate the next chapter. Wait for review. Never continue automatically.
 
