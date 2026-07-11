@@ -11,7 +11,7 @@ By the end of this chapter, you will be able to:
 - Explain why agentic RAG in 2026 is evaluated compositionally — retrieval quality plus end-to-end task success — rather than through a single consolidated benchmark, and why that's a confirmed fact about the field, not a research gap.
 - Treat retrieved content as untrusted, extending both Volume 3's Trustworthy RAG discipline and Chapter 10's indirect-injection lesson to the retrieval loop specifically.
 - Design a four-part bounded-retrieval control plane — iteration cap, enforced cost budget, explicit stop condition, and audit tracing — as a direct extension of Chapter 01's `max_iterations` and Chapter 08's TTL-expiry discipline.
-- Recognize and reject fabricated or unverifiable "incident" and benchmark claims in agentic RAG discourse, using this chapter's own research process as a worked example of the discipline.
+- Recognize and reject unverifiable "incident" claims and benchmark entries in agentic RAG discourse — including cases where a name looks fabricated but turns out to be real, just unverifiable for a different reason — using this chapter's own research process as a worked example of the discipline.
 
 ## Prerequisites
 
@@ -711,7 +711,7 @@ Aperture Cloud's support team wants an agent that answers policy and product que
 - Retrieved content — even from a trusted internal knowledge base — should be treated as untrusted data, never as an instruction channel, extending both Volume 3's Trustworthy RAG discipline and Chapter 10's indirect-injection lesson.
 - Agentic RAG evaluation in 2026 is compositional — retrieval quality (MTEB/BEIR) plus end-to-end task success (Chapter 12's trajectory evaluation) — with no single dominant agentic-RAG benchmark, and that's a confirmed fact about the field's maturity, not a gap.
 - Done correctly, agentic RAG can be strictly cheaper than a fixed pipeline, because it skips retrieval entirely for queries that don't need it — flexibility isn't purely a risk to bound.
-- This chapter's own research process — explicitly investigating and rejecting two unverifiable "incident" stories and one fabricated model name — is itself a worked example of the citation discipline this course applies throughout.
+- This chapter's own research process — explicitly investigating and rejecting two unverifiable "incident" stories, and separately flagging an unfamiliar benchmark model name that a later cross-check (Chapter 12's research) found was real but restricted-access rather than fabricated — is itself a worked example of the citation discipline this course applies throughout, including the discipline of revising a conclusion when new evidence contradicts it.
 
 ## Chapter Summary
 

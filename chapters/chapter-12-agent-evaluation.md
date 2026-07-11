@@ -10,7 +10,7 @@ By the end of this chapter, you will be able to:
 - Wire the Claude Agent SDK's session data into LangSmith's trajectory tracing using the confirmed current mechanism, and explain what it captures and what it deliberately excludes.
 - Name the current, confirmed-relevant agent benchmarks accurately, including which ones have been paused, superseded, or saturated — and why that matters for choosing what to cite.
 - Apply LLM-as-judge to trajectory evaluation while correctly mitigating position bias and recognizing self-preference bias as a specific, current, named risk for judging Claude-built agents with a Claude judge.
-- Verify a cited benchmark leaderboard entry against a vendor's actual current model list before trusting it — using a real fabricated entry this course's own research process caught live.
+- Verify a cited benchmark leaderboard entry against a vendor's actual current model list and access status before trusting it — using a real, restricted-access model this course's own research process almost mistook for a fabrication.
 - Design a fleet-relevant trajectory-evaluation pipeline that catches a costly-but-correct agent before it ships, not after.
 
 ## Prerequisites
@@ -35,7 +35,7 @@ By the end of this chapter, you will be able to:
 
 - **What it is:** Evaluating an agent by *how* it got to an answer, not just *whether* the answer was correct — trajectory-level evaluation as the missing middle layer between outcome checks and component-level debugging.
 - **Why it matters:** Two agents can reach an identical, correct final answer via wildly different paths — one cheap and reliable, one a 47-step disaster that happened to get there — and a single accuracy number hides this completely. Every chapter since Chapter 01 has been building the bounded loops, hooks, and audit trails this chapter now turns into an actual evaluation discipline.
-- **Key insight:** This chapter's own research process caught a fabricated model name sitting directly alongside real, current Claude models on an otherwise professional-looking benchmark leaderboard — discovered by accident while researching a chapter about evaluation discipline. That's not a tangent; it's the chapter's own thesis, demonstrated live: verify the path and the source, not just the headline number.
+- **Key insight:** This chapter's own research process flagged an unfamiliar model name — "Claude Mythos Preview" — sitting on a public benchmark leaderboard as a likely fabrication, discovered by accident while researching a chapter about evaluation discipline. A later verification pass found it's actually real: an invitation-only, restricted-access Anthropic preview model tied to a named cybersecurity initiative, not publicly available for anyone to benchmark. That correction *is* the chapter's own thesis, demonstrated live twice over: verify the path and the source, not just the headline number — and be willing to revise your own conclusion when a second check contradicts the first.
 - **What you build:** A trajectory recorder extending Chapter 11's retrieval trace, a Tool Correctness-style efficiency check, and an LLM-as-judge trajectory evaluator with position-bias mitigation and an explicit self-preference-bias guard — wired into LangSmith via the Claude Agent SDK's confirmed current tracing mechanism.
 - **Jump to:** [Core Concepts](#core-concepts) | [First Code](#beginner-implementation) | [Best Practices](#best-practices) | [Mini Project](#mini-project)
 
@@ -460,11 +460,11 @@ def test_support_agent_trajectory_efficiency():
 3. **Check tool-call coverage and efficiency as two independent conditions, never one combined boolean.** A trajectory can call every needed tool while still being wasteful — conflating the checks hides exactly the failure mode Tool Correctness is designed to catch.
 4. **Mitigate position bias with order-swap-and-average, and separately flag self-preference bias whenever the judge and agent share a model family.** These are two different biases with two different fixes — one doesn't solve the other.
 5. **Cite benchmark numbers with a specific named source, never an unqualified figure**, especially for SWE-bench Pro and other currently-source-dependent scores — per this chapter's own confirmed finding, unqualified figures are exactly where fabricated entries hide.
-6. **Verify any cited leaderboard model name against the vendor's own current model list before trusting a position on that leaderboard.** This chapter's own research caught a fabricated "Claude Mythos" entry sitting directly next to real current models on an otherwise professional-looking site — treat this as a real, current risk, not a hypothetical one.
+6. **Verify any cited leaderboard model name against the vendor's own current model list AND access status before trusting a position on that leaderboard.** This chapter's own research initially flagged "Claude Mythos Preview" as a likely-fabricated entry sitting next to real current models on a professional-looking site — a follow-up check found the name is real (an invitation-only Anthropic preview model), but that very restriction is what makes a specific public benchmark score attributed to it suspect: an outside site could not have independently run a benchmark against a model it doesn't have access to. Treat this as a real, current, two-layer verification risk — check both whether the name is real and whether the cited party could plausibly have produced that number.
 
 ## Security Considerations
 
-- **A benchmark leaderboard that looks professionally built can still contain a fabricated entry.** This chapter's own research process directly confirms this: a fabricated model name ("Claude Mythos 5" / "Claude Mythos Preview") appeared on two separate aggregator sites, on one sitting directly beside a real, confirmed current model at the #1 position. Treat any cited leaderboard entry as unverified until checked against the vendor's own current model documentation — this is a genuine, current, demonstrated risk to citation discipline, not an abstract caution.
+- **A benchmark leaderboard that looks professionally built can still contain an entry you can't actually verify — even when the model name itself turns out to be real.** This chapter's own research process directly demonstrates this: "Claude Mythos Preview," seen on two separate aggregator sites, was initially flagged as a fabricated model name. A follow-up check against Anthropic's own materials found it real — a restricted-access, invitation-only preview model tied to a named cybersecurity initiative. That doesn't clear the leaderboard entry: a model nobody outside a small invited group can access cannot have been independently benchmarked by a public aggregator site, so the specific score attributed to it remains unverifiable regardless of whether the name is genuine. Treat any cited leaderboard entry as unverified until checked against both the vendor's own current model documentation AND whether the cited party could plausibly have obtained that number at all — this is a genuine, current, demonstrated risk to citation discipline, not an abstract caution.
 - **An LLM judge is itself a trust boundary, the same way Chapter 11's `grade_documents` evaluator was.** A judge that can be manipulated — by a trajectory engineered to look efficient on the surface while hiding actual redundancy, or by adversarial content injected into tool outputs the judge reads — compromises the entire evaluation pipeline's integrity. Apply the same "treat evaluated content as data, not instructions" discipline Chapters 10 and 11 established for browser and retrieval content respectively.
 - **Self-preference bias has a security-adjacent failure mode worth naming explicitly**: a judge that systematically rates its own model family's trajectories more favorably can mask a genuine security or efficiency regression specifically in systems built on that same model family — meaning the bias isn't just a scoring inaccuracy, it can actively suppress detection of a real problem in exactly the systems most likely to be evaluated with a same-family judge for convenience.
 
@@ -521,8 +521,8 @@ result = await judge_trajectory_with_bias_mitigation(
 
 ```python
 # WRONG — citing a benchmark figure without a named source, exactly
-# the pattern that let a fabricated model name go unnoticed in this
-# chapter's own research.
+# the pattern that let an unverifiable score for a restricted-access
+# model go unquestioned in this chapter's own research.
 # "SWE-bench Pro top score: 69.2%"
 ```
 
@@ -634,7 +634,7 @@ This chapter directly resolves the question Chapter 11 closed with: its `Retriev
    *Answer: A judge model rating trajectories produced by its own model family more favorably. Order-swap mitigation addresses presentation-order effects, not the judge/agent model-family relationship — the two are independent biases requiring independent fixes (a different-family judge, or explicit discounting).*
 
 9. **What did this chapter's own research process find while investigating current benchmark leaderboards, and what lesson does it illustrate?**
-   *Answer: A fabricated model name ("Claude Mythos 5" / "Claude Mythos Preview") appeared on two separate aggregator sites, on one sitting directly beside a real current model at the #1 position on an otherwise professional-looking leaderboard. It illustrates this chapter's own central lesson live: verify the path/source behind a claim, not just the headline number, since a professional-looking source can still contain a fabricated entry.*
+   *Answer: An unfamiliar model name ("Claude Mythos Preview") appeared on two separate aggregator sites and was initially flagged as fabricated. A follow-up check found the name is real — a restricted-access, invitation-only Anthropic preview model — but that very restriction means a public site could not have independently produced the specific benchmark score attributed to it. It illustrates this chapter's own central lesson live, twice over: verify the path/source behind a claim, not just the headline number, and be willing to revise your own conclusion when a second, deeper check contradicts the first.*
 
 10. **In this chapter's Real Client Scenario, what specific regression did trajectory-level evaluation catch that outcome-only testing had missed for six weeks?**
     *Answer: A post-knowledge-base-reorganization increase in retrieval attempts per query — the agent still produced correct answers every time (outcome tests stayed green) and stayed within Chapter 11's iteration cap (no bound ever tripped), but was taking two to three retrieval attempts instead of one, a real, measurable cost/efficiency regression invisible to outcome-only testing.*
@@ -673,7 +673,7 @@ This chapter directly resolves the question Chapter 11 closed with: its `Retriev
 - OpenTelemetry's GenAI semantic conventions (v1.41) remain in Development stability — production-usable as a tracing pattern today, but attribute names may still change.
 - GAIA's most-cited leaderboard has explicitly paused chasing new-model updates in favor of measuring agent reliability — a real, current, primary-sourced signal supporting trajectory-over-outcome evaluation.
 - Position bias is mitigated by order-swap-and-average; self-preference bias requires a separate fix (a different-family judge, or explicit discounting) — the two are independent problems.
-- This chapter's own research caught a fabricated benchmark model name sitting beside real, current models on a professional-looking leaderboard — verify any cited leaderboard entry against the vendor's own current model list before trusting it.
+- This chapter's own research initially flagged an unfamiliar benchmark model name as fabricated, then found on a deeper check that it was real but restricted-access — meaning the specific public score attributed to it was still unverifiable for a different reason. Verify both the model name AND whether the cited party could plausibly have produced the number before trusting any leaderboard entry.
 - Trajectory-level checks belong in the same CI pipeline as outcome checks, not as a separate, manual, or later-added process — per this chapter's Production Issue, that's the only way to catch a regression before it ships.
 - Full LLM-as-judge evaluation on every production trajectory is rarely necessary — cheap deterministic checks (Tool Correctness) can run on everything, with sampled judge evaluation reserved for CI, regression testing, and periodic audits.
 
@@ -688,7 +688,7 @@ This chapter directly resolves the question Chapter 11 closed with: its `Retriev
 | OTel GenAI conventions | v1.41, still Development stability, production-usable pattern regardless |
 | Benchmark landscape | GAIA/HAL paused; SWE-bench Verified saturated, Pro emerging; AgentBench superseded |
 | LLM-judge bias | Position bias fixed by order-swap-average; self-preference bias needs a separate, explicit fix |
-| Citation discipline | Always cite a specific source; this chapter's own research caught a fabricated leaderboard entry live |
+| Citation discipline | Always cite a specific source and check access status; this chapter's own research initially misjudged a real-but-restricted-access model as fabricated, live |
 
 ## Resources
 
