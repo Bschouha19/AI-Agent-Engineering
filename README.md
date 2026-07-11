@@ -119,7 +119,7 @@ Every reference document is open-in-second-tab material — built for lookup, no
 | 2 | MCP Engineering | ✅ Complete (15 chapters) | [MCP-Engineering](https://github.com/Bschouha19/MCP-Engineering) |
 | 3 | RAG Deep Dive | ✅ Complete (15 chapters) | [RAG-Deep-Dive](https://github.com/Bschouha19/RAG-Deep-Dive) |
 | 4 | AI Agent Engineering | ✅ Complete (15 chapters) | [AI-Agent-Engineering](https://github.com/Bschouha19/AI-Agent-Engineering) |
-| 5 | n8n AI Workflow Automation | 🔜 Planned | — |
+| 5 | n8n Automation Engineering | 🔄 In Progress | [n8n-AI-Workflow-Automation](https://github.com/Bschouha19/n8n-AI-Workflow-Automation) |
 | 6 | Vector Database Engineering | 🔜 Planned | — |
 | 7 | Coding Agents | 🔜 Planned | — |
 | 8 | DevOps AI | 🔜 Planned | — |
