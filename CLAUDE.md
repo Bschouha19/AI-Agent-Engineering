@@ -333,8 +333,8 @@ Volume 3 repository: https://github.com/Bschouha19/RAG-Deep-Dive
 | 08 | Human-in-the-Loop and Bounded Autonomy | chapters/chapter-08-human-in-the-loop.md | ✅ Complete |
 | 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | chapters/chapter-09-claude-agent-sdk.md | ✅ Complete |
 | 10 | Computer-Use and Browser Agents | chapters/chapter-10-computer-use-browser-agents.md | ✅ Complete |
-| 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | 🔜 Next |
-| 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | chapters/chapter-12-agent-evaluation.md | 🔜 |
+| 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | ✅ Complete |
+| 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | chapters/chapter-12-agent-evaluation.md | 🔜 Next |
 | 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | chapters/chapter-13-agent-security.md | 🔜 |
 | 14 | Production Agent Operations at Scale | chapters/chapter-14-production-agent-ops.md | 🔜 |
 | 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | chapters/chapter-15-capstone.md | 🔜 |
