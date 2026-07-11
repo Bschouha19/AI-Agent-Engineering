@@ -405,9 +405,9 @@ async def can_use_tool_callback(tool_name: str, tool_input: dict) -> dict:
     """The Claude Agent SDK's confirmed current human-in-the-loop
     primitive — invoked at runtime for any tool call not already
     resolved earlier in the permission chain (hooks -> deny rules ->
-    permission mode -> allow rules -> HERE). This is where a human
-    approval prompt belongs for the Agent SDK's single-agent,
-    per-tool-call granularity."""
+    ask rules -> permission mode -> allow rules -> HERE). This is
+    where a human approval prompt belongs for the Agent SDK's
+    single-agent, per-tool-call granularity."""
     classification = classify_action(tool_name)
 
     # THE APPROVAL-FATIGUE FIX: auto-approve the confirmed-safe tail
@@ -459,7 +459,7 @@ options = ClaudeAgentOptions(
 **Why `canUseTool` and hooks are genuinely different tools, not two names for the same thing:**
 
 - `can_use_tool_callback` is where genuine human judgment enters the loop — it's `await`ed, and can take as long as a real approval workflow needs, exactly the same "wait as long as it takes" property Chapter 07's `interrupt()` has, just scoped to one tool call instead of an entire graph.
-- The confirmed current evaluation order matters architecturally: hooks run first and can deny outright, then deny rules, then the active permission mode's own logic, then `allowed_tools` (Chapter 03's least-privilege allowlist), and only *then* `canUseTool` for whatever's left unresolved. This means `canUseTool` is specifically the *last-resort, genuine-judgment* layer — everything before it in the chain is deterministic policy that doesn't need a human at all.
+- The confirmed current evaluation order matters architecturally: hooks run first and can deny outright, then deny rules, then any explicit `ask` rule (which forces a `canUseTool` prompt regardless of what comes after), then the active permission mode's own logic, then `allowed_tools` (Chapter 03's least-privilege allowlist), and only *then* `canUseTool` for whatever's left unresolved. This means `canUseTool` is specifically the *last-resort, genuine-judgment* layer — everything before it in the chain is deterministic policy that doesn't need a human at all.
 - Hooks exist specifically because some guarantees need to hold *regardless* of the active permission mode or what `canUseTool` might decide — "never read a credentials file" shouldn't depend on a human reviewer's judgment in the moment; it should be a deterministic rule enforced unconditionally, which is precisely what a hook is for and `canUseTool` is not.
 - The classifier inside `can_use_tool_callback` is the direct, concrete fix for this chapter's approval-fatigue Production Issue: it ensures a human is only ever prompted for the `EXTERNAL` and `HIGH_RISK_IRREVERSIBLE` tiers, never for the read-only or reversible tail that makes up the overwhelming majority of real tool-call volume.
 

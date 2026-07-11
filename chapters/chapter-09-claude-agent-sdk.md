@@ -129,17 +129,18 @@ ClaudeAgentOptions(
 
 A callback is `async def callback(input_data, tool_use_id, context)`, returning a dict. For `PreToolUse`, the decision lives inside `hookSpecificOutput`: `{hookEventName, permissionDecision: "allow"|"deny"|"ask"|"defer", permissionDecisionReason, updatedInput}`.
 
-**Confirmed current permission evaluation order** (this extends, precisely, the ordering Chapter 08's research already surfaced at the surface level):
+**Confirmed current permission evaluation order** (directly re-verified against the live SDK docs at time of writing — this corrects an earlier, imprecise ordering both this chapter and Chapter 08 had stated):
 
 ```
 Hooks (can deny/allow outright)
   → Deny rules
-    → Allow rules
-      → Ask rules
-        → Permission mode check
+    → Ask rules (forces a canUseTool prompt if matched, even in bypassPermissions)
+      → Permission mode check
+        → Allow rules
           → canUseTool callback
-            → PostToolUse hook
 ```
+
+`PostToolUse` is a separate hook that fires *after* a tool has already executed — it is not part of this pre-execution gating sequence, and citing it as a trailing stage of the "evaluation order" (as an earlier draft of this chapter did) overstates its role.
 
 **Confirmed current concurrency rule:** when multiple hooks match the same event, they run in **parallel**, not registration order, and `deny` outranks `defer`, which outranks `ask`, which outranks `allow`, if any hook returns a conflicting decision. Hooks must be written to act independently — never assume another hook has already run.
 
@@ -222,17 +223,16 @@ This is the single most important structural fact in this chapter: these are not
 ```mermaid
 flowchart LR
     Hooks["Hooks\n(can deny/allow\noutright)"] --> Deny["Deny rules"]
-    Deny --> Allow["Allow rules"]
-    Allow --> Ask["Ask rules"]
+    Deny --> Ask["Ask rules\n(forces canUseTool\nif matched)"]
     Ask --> Mode["Permission mode\ncheck"]
-    Mode --> CUT["canUseTool\ncallback"]
-    CUT --> Post["PostToolUse\nhook"]
+    Mode --> Allow["Allow rules"]
+    Allow --> CUT["canUseTool\ncallback"]
 
     style Hooks fill:#f8d4d4
     style CUT fill:#d4e8f0
 ```
 
-Everything left of `canUseTool` is deterministic policy — no human judgment involved. `canUseTool` is specifically the *last-resort* layer for genuine human decision-making, which is exactly why Chapter 08 used it for approval prompts. A rule you want to hold **unconditionally**, regardless of permission mode, has to live at the `Hooks` stage — putting it inside `canUseTool` instead means every stage to its left can still short-circuit past it.
+Everything left of `canUseTool` is deterministic policy — no human judgment involved (an `ask` rule forces a `canUseTool` prompt too, but that's still a deterministic *routing* decision, not the judgment itself). `canUseTool` is specifically the *last-resort* layer for genuine human decision-making, which is exactly why Chapter 08 used it for approval prompts. A rule you want to hold **unconditionally**, regardless of permission mode, has to live at the `Hooks` stage — putting it inside `canUseTool` instead means every stage to its left can still short-circuit past it.
 
 ## Flow Diagrams
 
@@ -747,7 +747,7 @@ This is the honest, load-bearing version of "put a rule where nothing can route 
    *Answer: A tool call shares the caller's full context. A subagent starts with a genuinely fresh context — it receives only the `Agent` tool's invocation prompt string, not the parent's conversation history, prior tool results, or system prompt.*
 
 2. **Why does an unconditional rule belong in a hook rather than `canUseTool`, even though both can deny a tool call?**
-   *Answer: `canUseTool` sits near the end of the confirmed permission evaluation order (hooks → deny rules → allow rules → ask rules → permission mode → canUseTool → PostToolUse hook) and can be shadowed entirely — by `bypassPermissions` mode, by an allow rule matching first, or simply never being reached (the SDK's own confirmed `CLAUDE_SDK_CAN_USE_TOOL_SHADOWED` warning). A hook runs first and denies outright, independent of permission mode or downstream configuration.*
+   *Answer: `canUseTool` sits near the end of the confirmed permission evaluation order (hooks → deny rules → ask rules → permission mode → allow rules → canUseTool) and can be shadowed entirely — by `bypassPermissions` mode, by an allow rule matching first, or simply never being reached (the SDK's own confirmed `CLAUDE_SDK_CAN_USE_TOOL_SHADOWED` warning). A hook runs first and denies outright, independent of permission mode or downstream configuration.*
 
 3. **What happens if you omit `tools` from an `AgentDefinition`?**
    *Answer: The subagent inherits ALL of the parent's tools, unscoped — not "no tools," which is the intuitive but incorrect assumption. This is a real least-privilege gotcha this chapter's Production Issue covers directly.*
@@ -806,7 +806,7 @@ This is the honest, load-bearing version of "put a rule where nothing can route 
 - Omitting `AgentDefinition.tools` silently grants a subagent the parent's full tool set; always set it explicitly.
 - `"Agent"` must be in the parent's `allowed_tools`, or subagent delegation silently falls through the permission chain instead of happening.
 - A subagent's context is genuinely isolated — only the `Agent` tool's invocation prompt string crosses the boundary; nothing else is shared automatically.
-- The confirmed current permission evaluation order is hooks → deny rules → allow rules → ask rules → permission mode → `canUseTool` → `PostToolUse` hook — and an unconditional guarantee belongs at the hook stage specifically because nothing downstream can override it.
+- The confirmed current permission evaluation order is hooks → deny rules → ask rules → permission mode → allow rules → `canUseTool` (`PostToolUse` is a separate, post-execution hook, not part of this gating sequence) — and an unconditional guarantee belongs at the hook stage specifically because nothing downstream can override it.
 - Hooks matching the same event run in parallel, not registration order, with `deny` outranking `defer`, `ask`, and `allow`.
 - Skills are filesystem artifacts with no programmatic registration API — a deliberate, structural contrast with subagents, which are fully programmatic via `AgentDefinition`.
 - `AgentDefinition.skills` preloads a Skill's full content into a subagent's context at startup, bypassing the normal lazy-discovery path.
@@ -821,7 +821,7 @@ This is the honest, load-bearing version of "put a rule where nothing can route 
 | Subagents (`AgentDefinition`) | Programmatic, context-isolated delegation — inherits nothing from the parent except the invocation prompt |
 | Hooks | Deterministic, unconditional rules that run first in the evaluation order — the only primitive immune to permission-mode or `canUseTool` misconfiguration |
 | Skills | Filesystem-only, packaged procedural knowledge — no programmatic API, lazily discovered unless preloaded |
-| Permission evaluation order | Hooks → deny rules → allow rules → ask rules → permission mode → `canUseTool` → `PostToolUse` hook |
+| Permission evaluation order | Hooks → deny rules → ask rules → permission mode → allow rules → `canUseTool` |
 | Session management | `continue`/`resume`/`fork` for whole sessions; `agentId`+`session_id` for one subagent's sub-conversation — genuinely different mechanisms |
 | Managed Agents | Beta; per-token pricing plus $0.08/session-hour active-runtime charge; Batch API discount doesn't apply |
 

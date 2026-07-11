@@ -11,7 +11,7 @@ By the end of this chapter, you will be able to:
 - Choose the right reasoning pattern for a given task's shape using a concrete decision framework, instead of defaulting to whichever pattern you learned first.
 - Connect Chapter 01's failure taxonomy — specifically termination and reasoning failure — to pattern-specific failure modes that are now backed by this chapter's own worked examples, not just named in the abstract.
 - Get oriented on Tree of Thoughts and Graph of Thoughts as the current frontier one level beyond this chapter's three core patterns, without needing to implement either yet.
-- Recognize reasoning- and planning-specific evaluation signals (plan adherence, step efficiency, tool correctness) well enough to know what Chapter 12's trajectory evaluator will eventually measure.
+- Recognize that a captured, structured reasoning trace (not just a final answer) is the raw material any future trajectory evaluator needs — the same principle Chapter 12 builds its own trajectory-recording pattern on.
 
 ## Prerequisites
 
@@ -687,7 +687,7 @@ Giving the Critic an explicit tie-breaking rule for a *documented, real* conflic
 
 - **Reasoning traces are data, and can leak.** A captured `Thought` may reference internal system details, other customers' data glimpsed during investigation, or reasoning a company wouldn't want surfaced externally. If any part of this chapter's `ReActTrace` or `AgentEvent` stream ever reaches a customer-facing surface (a support chat transcript, a public-facing debugging tool), it needs the same untrusted-content discipline Chapter 01 applied to tool results — except here, the trace is *your own* agent's output, which makes it easy to mistakenly treat as automatically safe to show. It isn't, by default.
 - **A poisoned early observation can bake a bad plan in for an entire Plan-and-Execute run.** Because the Planner runs once, up front, a prompt-injection payload hidden in a tool result the Planner sees (or in the task description itself) has outsized leverage compared to the same payload in a ReAct loop, where each step is re-reasoned independently — one bad plan can misdirect every subsequent Executor step, all working faithfully off a compromised plan. Treat the Planner's inputs with at least as much suspicion as Chapter 01 asked you to treat any tool result.
-- **A Critic with no adversarial awareness can be talked out of flagging a real problem**, the same way any single model call can be — a dual-role split raises the bar (the Critic isn't defending its own prior work) but does not make Reflection immune to a sufficiently well-crafted draft that argues its own case persuasively. Chapter 13 covers this class of risk (prompt injection against an evaluator/critic role) in full depth.
+- **A Critic with no adversarial awareness can be talked out of flagging a real problem**, the same way any single model call can be — a dual-role split raises the bar (the Critic isn't defending its own prior work) but does not make Reflection immune to a sufficiently well-crafted draft that argues its own case persuasively. Treat this the same way Chapter 13 treats any evaluator or judge in the loop generally: as a trust boundary that itself deserves scrutiny, not an automatically-reliable check.
 
 ## Cost Considerations
 
@@ -793,7 +793,7 @@ flowchart TD
 | Plan-and-Execute produces a plan referencing data that doesn't exist | Planner working from bad/incomplete task framing, or a poisoned early observation | The exact prompt/state the Planner node received |
 | Executor step fails silently, final report has a gap | Tool-use failure inside `execute_step`, swallowed rather than surfaced | `completed_steps` entries for a suspiciously generic or empty `result` |
 | Reflection critique text nearly repeats an earlier round's critique | Conflicting Critic criteria, no tie-breaking guidance | Compare critique text across all rounds in the trace, not just the latest |
-| Reflection approves a draft with a real, obvious flaw | Critic prompt too permissive, or draft is adversarially persuasive | Tighten Critic criteria; consider Chapter 13's guidance on evaluator-role robustness |
+| Reflection approves a draft with a real, obvious flaw | Critic prompt too permissive, or draft is adversarially persuasive | Tighten Critic criteria; treat the Critic itself as a trust boundary worth auditing, the same discipline Chapter 12 applies to any judge model |
 
 ## Performance Optimisation
 
@@ -948,7 +948,7 @@ Notice what stayed constant across all three: read-only or draft-only outputs, a
 - LangChain, *LangGraph* — [github.com/langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) (v1.2.9 as of 2026-07-11)
 - Yao et al., *Tree of Thoughts: Deliberate Problem Solving with Large Language Models* — the paper behind this chapter's ToT overview
 - Besta et al., *Graph of Thoughts: Solving Elaborate Problems with Large Language Models* — the paper behind this chapter's GoT overview
-- Agent Planning Benchmark (APB) — a 2026 planning-specific diagnostic benchmark (4,209 multimodal cases, 22 domains) built specifically to separate planning failures from execution failures, distinct from the end-to-end benchmarks (GAIA, SWE-bench, WebArena, Tau-Bench) verified in this repository's ROADMAP.md for Chapter 12
+- Agent Planning Benchmark (APB) — cited in an earlier draft as a 2026 planning-specific diagnostic benchmark (4,209 multimodal cases, 22 domains). **Currency Note, added during this course's final review pass:** unlike every other fast-moving fact in this repository, this specific citation was never independently cross-checked during Chapter 02's or Chapter 12's own research passes, and this review's attempt to verify it hit a tooling rate limit rather than a confirmation. Given this course's own track record of catching fabricated benchmark/model citations elsewhere (see Chapters 11–12's "Claude Mythos" correction), treat this specific entry as **unverified** — confirm it against a primary source before citing it in a production security or evaluation review.
 - This repository's `reference/02-reasoning-pattern-cheat-sheet.md` — quick-lookup companion to this chapter, for deciding ReAct vs. Plan-and-Execute vs. Reflection without re-reading the full chapter
 
 ## Glossary Terms Introduced
@@ -977,8 +977,8 @@ Notice what stayed constant across all three: read-only or draft-only outputs, a
 | Chapter 03 (Tool Use and Function Calling at Scale) | Directly extends this chapter's Performance Optimisation note on batching Plan-and-Execute's independent steps in parallel |
 | Chapter 04 (Agent Memory Systems) | Builds the persisted-memory layer that turns this chapter's plain Reflection into full Reflexion |
 | Chapter 07 (Building Multi-Agent Systems with LangGraph) | Goes far deeper on LangGraph than this chapter's single Plan-and-Execute graph — state schemas, checkpointing, multi-agent graphs |
-| Chapter 12 (Agent Evaluation) | Builds a trajectory evaluator directly on top of this chapter's captured reasoning traces and the plan-adherence/step-efficiency metrics previewed here |
-| Chapter 13 (Agent Security) | Full treatment of prompt injection against Planner and Critic roles, only previewed in this chapter's Security Considerations |
+| Chapter 12 (Agent Evaluation) | Builds its own trajectory-recording pattern (`TrajectoryRecorder`) on the same principle this chapter's captured reasoning traces establish — a structured, step-by-step record, not just a final answer — though on a separately-designed trace format and its own Tool Correctness metric, not this chapter's specific plan-adherence framing |
+| Chapter 13 (Agent Security) | Establishes that any judge/evaluator role in an agent system is itself a trust boundary worth scrutinizing — the general discipline this chapter's Critic-role caution previews, though Chapter 13 doesn't return to Planner/Critic roles by name |
 
 ## Preparation for Next Chapter
 

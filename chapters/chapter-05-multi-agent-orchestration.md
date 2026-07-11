@@ -1005,7 +1005,7 @@ This is the same underlying investigation Chapters 01–03 already built as a si
 | Chapter 04 (Agent Memory Systems) | The `user_id`/`agent_id` scoping discipline this chapter's workers will need once they share a memory store |
 | Chapter 06 (Agent-to-Agent Communication and the A2A Protocol) | Where agents crossing a real trust boundary — not just in-process coordination — need genuine identity and authentication |
 | Chapter 07 (Building Multi-Agent Systems with LangGraph) | Goes far deeper on LangGraph's multi-agent primitives than this chapter's introductory `Command` usage |
-| Chapter 13 (Agent Security) | Full treatment of the security risk this chapter previewed — a degraded specialist forcing a weaker fallback path being exploited deliberately |
+| Chapter 13 (Agent Security) | Names "Cascading Failures" as its own current OWASP category (ASI08) — the general risk class this chapter's fallback-hierarchy content belongs to, though Chapter 13 doesn't return to this chapter's specific degraded-specialist scenario by name |
 
 ## Preparation for Next Chapter
 

@@ -835,7 +835,7 @@ An agentic loop is fundamentally more expensive per task than a single-turn call
 
 The last row is the number that should motivate the entire "bound your loop, and fix ambiguous tool results" discipline of this chapter — a runaway agent isn't just an engineering embarrassment, it's the single largest cost multiplier in this table, and it produces zero value in exchange.
 
-**Free vs. paid trade-off:** running this chapter's exact examples against the Claude API costs real money per request (see the [Claude API pricing skill](#) for current per-token rates before estimating a fleet-scale budget). For pure architecture learning — the loop mechanics, the Protocol pattern, the bounds — you can substitute a free, locally-run open-weight model (e.g., via Ollama) behind the same tool-calling interface; the *architectural* lessons in this chapter (bounding a loop, structuring tool results, the Protocol seam) transfer identically regardless of which model sits behind the API call. What does **not** transfer for free is reasoning quality — a smaller local model is meaningfully more prone to the exact termination and reasoning failures this chapter's taxonomy describes, which ironically makes it a good, cheap way to *deliberately* reproduce those failure modes for practice before you're paying per-token to debug them in production.
+**Free vs. paid trade-off:** running this chapter's exact examples against the Claude API costs real money per request (check current per-token rates at `platform.claude.com/docs/en/about-claude/pricing` before estimating a fleet-scale budget). For pure architecture learning — the loop mechanics, the Protocol pattern, the bounds — you can substitute a free, locally-run open-weight model (e.g., via Ollama) behind the same tool-calling interface; the *architectural* lessons in this chapter (bounding a loop, structuring tool results, the Protocol seam) transfer identically regardless of which model sits behind the API call. What does **not** transfer for free is reasoning quality — a smaller local model is meaningfully more prone to the exact termination and reasoning failures this chapter's taxonomy describes, which ironically makes it a good, cheap way to *deliberately* reproduce those failure modes for practice before you're paying per-token to debug them in production.
 
 ## Common Mistakes
 
@@ -1090,8 +1090,8 @@ This is exactly this chapter's worked example — deliberately, since it's a gen
 - Python, *PEP 544 — Protocols: Structural subtyping* — the formal specification behind this chapter's `Agent` Protocol pattern
 - Microsoft Security Blog, *Updating the taxonomy of failure modes in agentic AI systems: what a year of red teaming taught us* (2026-06-04) — one of this chapter's failure-taxonomy sources
 - MAST (Multi-Agent System failure Taxonomy) — academic taxonomy of 14 failure modes across specification, inter-agent misalignment, and task-verification categories; previewed here, primary reference for Chapter 05/06
-- The AI Incident Database, Incident #1152 — the Replit production-database-deletion incident (2025); a concrete, multi-source-corroborated example of an unbounded, excessive-agency failure, referenced again in Chapter 08 and Chapter 13
-- Anthropic, *Disrupting the first reported AI-orchestrated cyber espionage campaign* (2025-11-14 disclosure, "GTG-1002") — referenced again, in depth, in Chapter 13
+- The AI Incident Database, Incident #1152 — the Replit production-database-deletion incident (2025); a concrete, multi-source-corroborated example of an unbounded, excessive-agency failure. Chapters 08 and 13 use different, separately-corroborated real incidents (AWS/Kiro; the Moltbook and Vercel/Context.ai breaches) for their own case studies rather than returning to this one — this incident stands on its own as this chapter's illustration, not a thread those later chapters pick back up.
+- Anthropic, *Disrupting the first reported AI-orchestrated cyber espionage campaign* (2025-11-14 disclosure, "GTG-1002") — this chapter's own illustration of excessive agency at the highest stakes; not revisited by name in a later chapter
 
 ## Glossary Terms Introduced
 
@@ -1124,8 +1124,8 @@ This is exactly this chapter's worked example — deliberately, since it's a gen
 | Chapter 06 (Agent-to-Agent Protocol) | Where agent impersonation, only previewed here, gets a full identity-verification treatment on top of this chapter's Protocol interface |
 | Chapter 08 (Human-in-the-Loop) | Defines exactly what should happen when a bound trips, beyond this chapter's "raise, don't swallow" rule |
 | Chapter 09 (Claude Agent SDK) | Goes deep on the SDK backend this chapter only introduced at the surface level in the Advanced Implementation |
-| Chapter 12 (Agent Evaluation) | Builds a trajectory-level evaluator directly on top of this chapter's `AgentEvent` trace shape |
-| Chapter 13 (Agent Security) | Full treatment of excessive agency, tool-call injection, and the two 2025 incidents referenced in this chapter's Resources |
+| Chapter 12 (Agent Evaluation) | Builds its own trajectory-recording pattern on the same principle this chapter's `AgentEvent` establishes — log every step, not just the final answer — though on a separate, independently-designed trace format |
+| Chapter 13 (Agent Security) | Maps the current OWASP Top 10 for Agentic Applications onto primitives across this course, with its own new territory (per-instance identity) and its own real case studies (Moltbook, Vercel/Context.ai) — not a continuation of this chapter's specific incidents |
 
 ## Preparation for Next Chapter
 

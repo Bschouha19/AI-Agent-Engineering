@@ -743,26 +743,27 @@ response = client.messages.create(
 
 ```python
 # WRONG — "parallelizing" calls that aren't actually independent.
-# submit_refund depends on confirm_customer_identity having already
-# succeeded — running them concurrently can submit a refund before
-# identity is confirmed.
-async def process_refund_unsafe(customer_id, amount):
+# update_customer_notes depends on fetch_customer_record having
+# already succeeded — running them concurrently can write notes
+# against a customer record that hasn't finished loading, or doesn't
+# exist yet.
+async def process_note_update_unsafe(customer_id, note_text):
     await asyncio.gather(
-        confirm_customer_identity(customer_id),
-        submit_refund(customer_id, amount),
+        fetch_customer_record(customer_id),
+        update_customer_notes(customer_id, note_text),
     )
 ```
 
 ```python
 # RIGHT — dependency-respecting sequencing; only the genuinely
 # independent calls are batched.
-async def process_refund_safe(customer_id, amount):
-    await confirm_customer_identity(customer_id)
+async def process_note_update_safe(customer_id, note_text):
+    await fetch_customer_record(customer_id)
     await asyncio.gather(
         fetch_recent_orders(customer_id),
         fetch_support_history(customer_id),
     )
-    await submit_refund(customer_id, amount)
+    await update_customer_notes(customer_id, note_text)
 ```
 
 ```python
@@ -841,7 +842,7 @@ flowchart TD
 
 ## Decision Framework — When to Parallelize a Batch of Tool Calls
 
-1. **Do any of the calls depend on another call's result or confirmed success?** If yes, that dependency must be respected sequentially — parallelize only the independent subsets, as the Common Mistakes section's refund example shows.
+1. **Do any of the calls depend on another call's result or confirmed success?** If yes, that dependency must be respected sequentially — parallelize only the independent subsets, as the Common Mistakes section's customer-notes example shows.
 2. **Do any of the calls write to, or otherwise mutate, shared state?** Two read-only lookups are safe to parallelize. Two calls that write to the same record, or where ordering affects the outcome, are not — parallelize only the read-only or independently-scoped subset.
 3. **Is the latency savings worth the added failure-handling complexity for this specific batch?** A batch of 2 calls that already complete in under 200ms combined has little to gain and adds partial-failure-handling code for marginal benefit; a batch of 5+ slower calls is where parallel dispatch's latency win becomes the dominant consideration.
 4. **Whatever you decide, does every call — parallel or sequential — still get a matched, honest `tool_result`, success or failure?** This is non-negotiable regardless of the answer to 1–3, per this chapter's Diagram 3.
@@ -992,9 +993,9 @@ Walking this through the chapter: the actual root cause wasn't any individual to
 | Volume 3, Chapter 06 (Dense Retrieval) | The retrieval mechanism `search_tools` reuses conceptually for finding relevant tools instead of relevant documents |
 | Chapter 04 (Agent Memory Systems) | Applies this chapter's `search_tools` retrieval pattern to a different kind of content — past experiences instead of tool schemas |
 | Chapter 05 (Multi-Agent Orchestration) | Where shared circuit-breaker state and cross-agent tool governance become genuinely harder problems than this chapter's single-agent version |
-| Chapter 12 (Agent Evaluation) | Where BFCL sits alongside the end-to-end agent benchmarks as a tool-use-specific evaluation signal |
-| Chapter 13 (Agent Security) | Full treatment of malicious/near-duplicate tool registration and the injection risk this chapter's Security Considerations previewed |
-| Chapter 14 (Production Agent Operations) | Fleet-level circuit-breaker and rate-governance concerns this chapter's single-service version is the foundation for |
+| Chapter 12 (Agent Evaluation) | Component-level evaluation (one of Chapter 12's three evaluation tiers) is where a tool-use-specific signal like BFCL would sit, alongside the end-to-end agent benchmarks Chapter 12 actually surveys (GAIA, SWE-bench, WebArena, τ-bench, AgentBench) |
+| Chapter 13 (Agent Security) | Maps OWASP's Tool Misuse and Exploitation category (ASI02) onto this chapter's least-privilege tool-scoping discipline — extends the general principle, not this chapter's specific malicious-tool-registration scenario |
+| Chapter 14 (Production Agent Operations) | This chapter's per-tool circuit breaker is single-service; Chapter 14's LiteLLM-based rate/budget governance (`tpm_limit`, `rpm_limit`, `session_tpm_limit`) is the fleet-scale mechanism built for the same underlying problem, in different vocabulary |
 
 ## Preparation for Next Chapter
 

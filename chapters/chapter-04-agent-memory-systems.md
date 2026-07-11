@@ -924,7 +924,7 @@ Wiring in this chapter's `ReflexionAgent`, backed by Mem0 and correctly scoped p
 | Chapter 03 (Tool Use and Function Calling at Scale) | The `search_tools` retrieval pattern this chapter's episodic memory search directly parallels, applied to experiences instead of tools |
 | Volume 3, Chapter 06 (Dense Retrieval) | The retrieval mechanism this chapter's recency-relevance-importance formula extends with two additional terms |
 | Chapter 05 (Multi-Agent Orchestration) | Where shared memory across multiple agents — not just multiple sessions of one agent — becomes the next scoping challenge |
-| Chapter 13 (Agent Security) | Full treatment of memory poisoning and tenant-boundary enforcement, only previewed in this chapter's Security Considerations |
+| Chapter 13 (Agent Security) | Maps memory/context poisoning onto OWASP's named ASI06 category and, separately, extends tenant-boundary enforcement into per-instance identity scoping (Chapter 15 composes the two directly) — a framing extension of this chapter's Security Considerations, not a deeper technical treatment of memory poisoning specifically |
 
 ## Preparation for Next Chapter
 

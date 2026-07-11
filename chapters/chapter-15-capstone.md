@@ -4,7 +4,7 @@
 
 By the end of this chapter, you will be able to:
 
-- Assemble every primitive this course has built — reasoning loops, tool use, memory, multi-agent orchestration, A2A communication, human oversight, subagents/hooks/Skills, browser automation, agentic RAG, trajectory evaluation, identity, and fleet governance — into one coherent, working production system.
+- Assemble every primitive this course has built — reasoning loops, tool use, memory, multi-agent orchestration, in-process subagent delegation, human oversight, subagents/hooks/Skills, browser automation, agentic RAG, trajectory evaluation, identity, and fleet governance — into one coherent, working production system, and correctly judge that this particular system's trust boundaries call for Chapter 09's Agent-tool delegation rather than Chapter 06's A2A protocol.
 - Diagnose an "integration failure" — a bug that exists only at the seam between two individually-correct components, not inside either one — a failure category no single prior chapter's primitives can catch alone.
 - Compare your own system's subagent design against Anthropic's own published, real, production multi-agent reference architecture, and apply its core lesson directly.
 - Build a complete incident-to-fix narrative for a fleet-governance failure, using this course's own real, confirmed 2026 case study as the template.
@@ -112,12 +112,12 @@ flowchart TB
 
     subgraph Observability["Observability"]
         Trace["Trajectory tracing — Ch12"]
-        A2A["A2A trace unification — Ch06, Ch14"]
+        Unify["Subagent trace correlation\nvia parent_tool_use_id — Ch09"]
     end
 
-    Orch -->|"A2A — Ch06"| Remediation
-    Orch -->|"A2A"| Research
-    Orch -->|"A2A"| Browser
+    Orch -->|"Agent tool\ndelegation — Ch09"| Remediation
+    Orch -->|"Agent tool\ndelegation"| Research
+    Orch -->|"Agent tool\ndelegation"| Browser
 
     Remediation & Research & Browser --> Identity
     Identity --> Hooks
@@ -125,12 +125,14 @@ flowchart TB
     Hooks -->|"high-risk"| HITL
 
     Remediation & Research & Browser --> Trace
-    Trace --> A2A
+    Trace --> Unify
 
     style Remediation fill:#f8d4d4
     style HITL fill:#f8f4d4
     style Identity fill:#d4e8f0
 ```
+
+> **Correction:** an earlier draft of this diagram labeled subagent delegation as "A2A." It isn't — per Chapter 06's own definition, A2A is specifically for an agent outside the current process, framework, or organization, and per Chapter 09, subagents are invoked in-process through the `Agent` tool. All three of Aperture Cloud's subagents here live inside one trust domain (Aperture Cloud's own systems), so Chapter 09's mechanism is the correct one — A2A would only enter this picture if this system needed to talk to an agent genuinely outside that boundary, which it doesn't. Getting this distinction right matters precisely because Chapter 07 spent real effort teaching it.
 
 This is the single diagram this entire course has been building toward — every box is a real primitive from a specific earlier chapter, not a new invention. Chapter 15's actual work is making every arrow between these boxes correct, not inventing new boxes.
 
@@ -166,7 +168,7 @@ sequenceDiagram
     participant Trace as Trajectory trace (Ch12)
 
     User->>Orch: "Investigate and remediate\nthe production alert"
-    Orch->>Sub: A2A delegation (Ch06),\nEXPLICIT contract (Ch09/Ch15):\nobjective, format, boundaries
+    Orch->>Sub: Agent tool delegation (Ch09),\nEXPLICIT contract (Ch09/Ch15):\nobjective, format, boundaries
     Sub->>Id: Present identity
     Id-->>Sub: Valid — proceed
     Sub->>Budget: Request spend estimate
@@ -179,7 +181,7 @@ sequenceDiagram
         HITL-->>Sub: Approved
     end
     Sub->>Trace: Every step logged
-    Sub-->>Orch: Result, via A2A
+    Sub-->>Orch: Result, via Agent tool return
     Orch-->>User: Final answer
 ```
 
@@ -200,8 +202,11 @@ Stage one of the full build: the orchestrator and subagent skeleton, using this 
 # current production reference architecture.
 from claude_agent_sdk import AgentDefinition
 
-# Reused directly: everything from Chapters 07 (StateGraph orchestrator),
-# 09 (AgentDefinition, hooks), 11 (bounded retrieval), 10 (Playwright MCP)
+# This stage reuses Chapter 09's AgentDefinition pattern directly.
+# The orchestrator (Ch07's StateGraph), Ch11's retrieval server, and
+# Ch10's Playwright MCP wiring are referenced by name/tool-string here
+# and assembled explicitly in this chapter's Advanced Implementation
+# below — not repeated in full in every stage.
 
 remediation_subagent = AgentDefinition(
     description=(
@@ -379,10 +384,15 @@ options = ClaudeAgentOptions(
     },
     hooks={
         "PreToolUse": [
-            # ORDER matters, per Ch09's evaluation-order lesson:
-            # identity first, THEN identity-consistency across
-            # approval gaps, THEN budget, THEN domain/tool-specific
-            # checks — each layer assumes the ones before it held.
+            # Per Ch09's confirmed rule, hooks matching the same event
+            # run in PARALLEL, not registration order — there is no
+            # sequencing mechanism here, and none is needed. Each of
+            # these three hooks checks an INDEPENDENT condition and
+            # can only ever DENY, never allow on another hook's
+            # behalf — so per Ch09's confirmed priority rule ("deny
+            # outranks defer, which outranks ask, which outranks
+            # allow"), correctness comes from every hook being
+            # independently right, not from any ordering between them.
             HookMatcher(matcher=".*", hooks=[identity_scoped_authorization_hook]),  # Ch13
             HookMatcher(matcher=".*", hooks=[identity_consistent_execution_hook]),  # THIS chapter
             HookMatcher(matcher="mcp__playwright__.*", hooks=[enforce_domain_allowlist]),  # Ch10
@@ -408,8 +418,13 @@ async def run_capstone_system(user_request: str, team_name: str = "aperture-flee
             results.append(message)
             # Every message, from every subagent (identifiable via
             # parent_tool_use_id, per Ch09), feeds the SAME LangSmith
-            # thread_id via A2A unification (Ch06, Ch14) — one
-            # coherent trace across the whole request, not three.
+            # thread_id because subagent runs are captured within the
+            # SAME session trace (Ch09/Ch12) — one coherent trace
+            # across the whole request, not three. This is DISTINCT
+            # from Ch14's A2A-to-thread_id unification, which solves
+            # the same "one trace, many agents" problem for agents
+            # crossing a genuine A2A trust boundary (Ch06) — not
+            # needed here, since these subagents are all in-process.
 
     memory_store.write(identity.spiffe_id, {"request": user_request, "result": str(results)})
     return {"status": "completed", "identity": identity.spiffe_id, "results": results}
@@ -418,7 +433,7 @@ async def run_capstone_system(user_request: str, team_name: str = "aperture-flee
 **Why this composition, in this specific order, is the actual point of the entire chapter:**
 
 - Every single import, class, and function in this block is reused from an earlier chapter or this chapter's own Intermediate Implementation — the Advanced Implementation introduces exactly zero genuinely new primitives. Its entire content is correct composition.
-- The hook ordering comment is not decorative — per Chapter 09's confirmed evaluation order, hooks matching the same event run in parallel unless explicitly sequenced by the matcher/registration design, and this system's specific layering (identity → identity-consistency → domain-specific checks) reflects a deliberate dependency order where later checks assume earlier ones already held.
+- This is a case where getting Chapter 09's own rule right matters: hooks matching the same event run in **parallel**, with no sequencing mechanism at all — an earlier draft of this example incorrectly claimed the three `PreToolUse` hooks here executed in a "deliberate dependency order." They don't, and don't need to. Each hook checks one independent condition and can only ever `deny`; since a `deny` from any hook blocks the operation regardless of what the others return (Chapter 09's confirmed priority rule), this composition is correct because every individual hook is correct on its own terms, not because of an ordering that doesn't exist.
 - The Currency Note about `claude-agent-sdk` 0.2.116 versus this course's own research-pass findings of 0.2.114/0.2.115 is not a footnote — it's live proof of this chapter's own "verify both directions" lesson: a version number this course cited as current just chapters ago had already drifted by the time this final chapter was drafted, in the same session.
 
 ---
@@ -428,7 +443,7 @@ async def run_capstone_system(user_request: str, team_name: str = "aperture-flee
 ```mermaid
 flowchart TB
     Request["User/system request"] --> Orch["Orchestrator (Ch05/07)"]
-    Orch -->|"A2A + explicit\ncontract (this chapter)"| Sub["Subagent (any of three)"]
+    Orch -->|"Agent tool delegation\n+ explicit contract\n(Ch09/this chapter)"| Sub["Subagent (any of three)"]
 
     Sub --> IdCheck["Identity check (Ch13)"]
     IdCheck --> ConsistCheck["Identity-CONSISTENCY\ncheck (THIS chapter) —\ncloses the integration gap"]
@@ -605,7 +620,7 @@ Per this course's own Framework Thread, established in Chapter 01: this was neve
 
 ## Real Client Scenario — Aperture Cloud's Complete System
 
-This is the closing chapter of Aperture Cloud's own thread through this entire course. What started in Chapter 01 as a single hand-rolled agent loop is now, in this chapter, one production system: an orchestrator (Chapters 05, 07) delegating via A2A (Chapter 06) to three subagents built on explicit contracts (this chapter, validated against Anthropic's own real production reference architecture) — a remediation subagent with genuine production write access (Chapters 01, 09), a bounded agentic-RAG research subagent (Chapter 11), and a sandboxed browser-automation pricing subagent (Chapter 10). Every subagent instance carries its own identity (Chapter 13), scoped memory (Chapter 04, composed correctly with identity per this chapter's fix), and passes through this chapter's identity-consistency check before any approved high-risk action executes — the direct, concrete fix for the exact gap this chapter's own Production Issue demonstrates. Fleet-wide spend is governed centrally (Chapter 14) with a team cap modeled on a real company's real, confirmed post-incident fix, not an invented number. Every request, across every subagent, produces one unified trace (Chapters 06, 12, 14) rather than three disconnected logs. This is not a new company or a new scenario — it is the same Aperture Cloud this course has built with, chapter by chapter, for fourteen chapters, finally operating as the single system it was always heading toward.
+This is the closing chapter of Aperture Cloud's own thread through this entire course. What started in Chapter 01 as a single hand-rolled agent loop is now, in this chapter, one production system: an orchestrator (Chapters 05, 07) delegating via Chapter 09's in-process Agent tool — not Chapter 06's A2A protocol, since all three subagents live inside Aperture Cloud's own single trust domain — to three subagents built on explicit contracts (this chapter, validated against Anthropic's own real production reference architecture) — a remediation subagent with genuine production write access (Chapters 01, 09), a bounded agentic-RAG research subagent (Chapter 11), and a sandboxed browser-automation pricing subagent (Chapter 10). Every subagent instance carries its own identity (Chapter 13), scoped memory (Chapter 04, composed correctly with identity per this chapter's fix), and passes through this chapter's identity-consistency check before any approved high-risk action executes — the direct, concrete fix for the exact gap this chapter's own Production Issue demonstrates. Fleet-wide spend is governed centrally (Chapter 14) with a team cap modeled on a real company's real, confirmed post-incident fix, not an invented number. Every request, across every subagent, produces one unified trace within a single LangSmith session (Chapters 09, 12) rather than three disconnected logs — a different, simpler mechanism than the A2A-to-thread_id unification Chapter 14 built for genuinely cross-boundary multi-agent traces, which this in-process fleet doesn't need. This is not a new company or a new scenario — it is the same Aperture Cloud this course has built with, chapter by chapter, for fourteen chapters, finally operating as the single system it was always heading toward.
 
 ---
 
@@ -614,7 +629,7 @@ This is the closing chapter of Aperture Cloud's own thread through this entire c
 1. **(30 min)** Build this chapter's three subagent contracts (`remediation_subagent`, `research_subagent`, `pricing_subagent`) exactly as specified, and write a test confirming each subagent's `tools` allowlist structurally prevents at least one out-of-scope action its own prompt boundary describes.
 2. **(45 min)** Deliberately reproduce this chapter's Production Issue: simulate an approval, then simulate a retry that spawns a new identity, and confirm the system — WITHOUT this chapter's `identity_consistent_execution_hook` — incorrectly allows the new identity to execute the previously-approved action. Then apply the fix and confirm it's blocked.
 3. **(45 min)** Build `ScopedMemoryStore` and write a test confirming one identity cannot read another identity's memory, even when both identities are independently valid per `IdentityRegistry`.
-4. **(60 min)** Wire all three subagents into one `ClaudeAgentOptions` configuration with the full hook chain (identity → identity-consistency → domain/tool-specific), and confirm via a test that the hooks fire in the intended dependency order.
+4. **(60 min)** Wire all three subagents into one `ClaudeAgentOptions` configuration with the full hook set (identity, identity-consistency, domain/tool-specific), and confirm via a test that a `deny` from any single hook blocks the operation regardless of which of the (parallel-executing) hooks returns it first.
 5. **(90 min, Challenge)** Enumerate every composition seam in your own built system (not just the ones this chapter names explicitly) and write at least one deliberate integration test for each — treating this as the final, most important exercise in the entire course, since it's the discipline this chapter exists to teach.
 
 ## Quiz
@@ -643,8 +658,8 @@ This is the closing chapter of Aperture Cloud's own thread through this entire c
 8. **What does this chapter's Cost Considerations section identify as its own distinctive, hard-to-quantify cost risk?**
    *Answer: The cost of NOT testing integration points/seams between components — unlike every earlier chapter's bounded, quantifiable cost line items, an unexamined seam has no clean cost line item in advance, which is exactly why it's named explicitly rather than assumed to be covered by the sum of individually well-costed components.*
 
-9. **How does this chapter's hook ordering (identity → identity-consistency → domain/tool-specific checks) reflect a deliberate dependency, not an arbitrary sequence?**
-   *Answer: Each layer assumes the ones before it already held — the identity-consistency check assumes a valid identity was already confirmed; domain-specific checks assume both identity and consistency already passed. This ordering is a direct application of Chapter 09's confirmed permission evaluation order discipline, extended to this chapter's own new identity-consistency layer.*
+9. **This chapter registers three separate `PreToolUse` hooks (identity, identity-consistency, domain allowlist). Given Chapter 09's confirmed rule that same-event hooks run in parallel with no sequencing, why is this composition still correct?**
+   *Answer: Because each hook checks one independent condition and can only ever `deny`, never allow on another hook's behalf. Per Chapter 09's confirmed priority rule, a `deny` from any hook blocks the operation regardless of what the others return or in what order they finish — so correctness comes from every individual hook being right on its own terms, not from a dependency ordering between them, which the SDK doesn't provide and this chapter doesn't need.*
 
 10. **What is the single sentence this chapter's Production Issue's "How to Prevent It in Future" section identifies as the general principle behind fixing integration failures?**
     *Answer: Never treat "approved" (or any cross-component guarantee) as automatically holding across a composition boundary — explicitly test and enforce the seam itself, because integration failures are, by definition, structurally invisible to any single component's own test suite.*
@@ -665,11 +680,11 @@ This is the closing chapter of Aperture Cloud's own thread through this entire c
 **Build:** The complete Capstone system from this chapter's Advanced Implementation — all three subagents, identity, identity-consistency checking, scoped memory, fleet budget governance, and unified tracing, composed into one working system with this chapter's specific integration-failure fix implemented and tested.
 
 **Acceptance Criteria:**
-- [ ] All three subagents are wired into one `ClaudeAgentOptions` with the full hook chain, in the dependency order this chapter specifies.
+- [ ] All three subagents are wired into one `ClaudeAgentOptions` with the full set of `PreToolUse` hooks, and a test confirms a `deny` from any one hook blocks the operation regardless of parallel-execution timing, per Chapter 09's confirmed rule.
 - [ ] This chapter's Production Issue is deliberately reproduced (a retry-during-pending-approval scenario) and confirmed to fail WITHOUT `identity_consistent_execution_hook`, then confirmed fixed WITH it.
 - [ ] `ScopedMemoryStore` correctly prevents cross-identity memory reads, tested explicitly.
 - [ ] Fleet-wide spend is governed centrally with a team cap, and a deliberate over-budget scenario is confirmed denied.
-- [ ] A single unified trace (via LangSmith A2A unification or equivalent) is confirmed to contain steps from at least two different subagent types for one composite request.
+- [ ] A single unified trace (via a shared LangSmith session/`thread_id`, since these subagents are in-process — see Chapter 14's separate A2A-to-thread_id mechanism if adapting this system to genuinely cross-boundary agents) is confirmed to contain steps from at least two different subagent types for one composite request.
 - [ ] A written account (even brief) of at least three composition seams in your system, beyond the ones this chapter names explicitly, each with its own deliberate integration test.
 - [ ] The system is explicitly documented as adaptable to a different domain, per this chapter's Decision Framework — name what would change (the consequential agent, the risk-tiered action registry, the specific tools) for a customer-support or DevOps-automation variant.
 

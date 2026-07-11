@@ -184,6 +184,8 @@ The `Ctrl` participant checking bounds *before* every cycle — not just once at
 
 The confirmed current LangGraph reference architecture, built directly from primary source, with this chapter's required fix: an explicit iteration cap closing the confirmed gap.
 
+> **Currency Note:** LangGraph reached v1.0 shortly after this chapter's research, deprecating the separate, higher-level `langgraph.prebuilt.create_react_agent` convenience wrapper in favor of `langchain.agents.create_agent`. This chapter does not use `create_react_agent` — it builds a custom graph directly with `StateGraph` and `ToolNode`, which the framework's own current documentation still shows as the recommended path specifically for cases needing this level of custom control (re-verified against the live docs at time of writing). `ToolNode` itself remains functional and undeprecated. If you're building a simpler agent that doesn't need this chapter's custom retrieve/grade/rewrite branching, prefer `langchain.agents.create_agent` over the older `create_react_agent` name.
+
 ```python
 # Learning example — LangGraph's own confirmed current agentic-RAG
 # reference architecture (generate_query_or_respond -> retrieve ->
