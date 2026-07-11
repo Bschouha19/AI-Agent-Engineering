@@ -59,14 +59,14 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 ## Progress
 
-**12 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11.
+**13 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11.
 
 | Module | Chapters | Status |
 |--------|----------|--------|
 | 1 — Agent Foundations, Deepened | Ch 01–04 | ✅ Complete |
 | 2 — Multi-Agent Engineering | Ch 05–08 | ✅ Complete |
 | 3 — Specialized and Production Agent Capabilities | Ch 09–11 | ✅ Complete |
-| 4 — Trustworthy, Evaluated, Production-Grade Agents | Ch 12–14 | 🔄 In Progress (1/3) |
+| 4 — Trustworthy, Evaluated, Production-Grade Agents | Ch 12–14 | 🔄 In Progress (2/3) |
 | 5 — Capstone | Ch 15 | 🔜 Not started |
 
 ### Chapter-by-Chapter
@@ -85,8 +85,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | 10 | Computer-Use and Browser Agents | ✅ Complete |
 | 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | ✅ Complete |
 | 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | ✅ Complete |
-| 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | 🔜 Next |
-| 14 | Production Agent Operations at Scale | 🔜 |
+| 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | ✅ Complete |
+| 14 | Production Agent Operations at Scale | 🔜 Next |
 | 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | 🔜 |
 
 See [COURSE_INDEX.md](./COURSE_INDEX.md) for learning goals and the full chapter dependency map.

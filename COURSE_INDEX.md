@@ -13,7 +13,7 @@
 
 ## Progress
 
-**12 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11.
+**13 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11.
 
 ---
 
@@ -82,8 +82,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
 | 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | chapters/chapter-12-agent-evaluation.md | ✅ Complete | Trajectory vs. outcome evaluation, agent benchmarks, catching costly-but-correct paths |
-| 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | chapters/chapter-13-agent-security.md | 🔜 Next | Least-privilege agent design, sandboxing, agent identity, named agentic security frameworks |
-| 14 | Production Agent Operations at Scale | chapters/chapter-14-production-agent-ops.md | 🔜 | Agent fleet management, cost governance, multi-agent failure debugging |
+| 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | chapters/chapter-13-agent-security.md | ✅ Complete | Least-privilege agent design, sandboxing, agent identity, named agentic security frameworks |
+| 14 | Production Agent Operations at Scale | chapters/chapter-14-production-agent-ops.md | 🔜 Next | Agent fleet management, cost governance, multi-agent failure debugging |
 
 **Module 4 Learning Goal:** Build an agent system that knows whether it's actually succeeding (not just producing plausible output), stays within its intended capability boundary, and can be operated reliably as a fleet, not just a single instance.
 
