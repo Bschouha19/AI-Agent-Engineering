@@ -13,7 +13,7 @@
 
 ## Progress
 
-**9 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11.
+**10 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11.
 
 ---
 
@@ -67,8 +67,8 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
 | 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | chapters/chapter-09-claude-agent-sdk.md | ✅ Complete | Subagent delegation, hook-based control, permission modes, Skills |
-| 10 | Computer-Use and Browser Agents | chapters/chapter-10-computer-use-browser-agents.md | 🔜 Next | Browser automation agents, visual UI interpretation, real-world action risk |
-| 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | 🔜 | Retrieval as an agent tool, bounded retrieval loops, connecting Volume 3's retrieval stack to agent reasoning |
+| 10 | Computer-Use and Browser Agents | chapters/chapter-10-computer-use-browser-agents.md | ✅ Complete | Browser automation agents, visual UI interpretation, real-world action risk |
+| 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | chapters/chapter-11-agentic-rag-revisited.md | 🔜 Next | Retrieval as an agent tool, bounded retrieval loops, connecting Volume 3's retrieval stack to agent reasoning |
 
 **Module 3 Learning Goal:** Apply this course's foundations to real, high-capability tool categories — a production-grade single-agent framework, computer-use, and retrieval-as-a-tool — where a mistake has genuine, not hypothetical, consequences.
 
