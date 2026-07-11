@@ -59,13 +59,13 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 ## Progress
 
-**8 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11.
+**9 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11.
 
 | Module | Chapters | Status |
 |--------|----------|--------|
 | 1 — Agent Foundations, Deepened | Ch 01–04 | ✅ Complete |
 | 2 — Multi-Agent Engineering | Ch 05–08 | ✅ Complete |
-| 3 — Specialized and Production Agent Capabilities | Ch 09–11 | 🔜 Not started |
+| 3 — Specialized and Production Agent Capabilities | Ch 09–11 | 🔄 In Progress |
 | 4 — Trustworthy, Evaluated, Production-Grade Agents | Ch 12–14 | 🔜 Not started |
 | 5 — Capstone | Ch 15 | 🔜 Not started |
 
@@ -73,16 +73,16 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | 🔜 Next |
-| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | 🔜 |
-| 03 | Tool Use and Function Calling at Scale | 🔜 |
-| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | 🔜 |
-| 05 | Multi-Agent Orchestration Patterns | 🔜 |
-| 06 | Agent-to-Agent Communication and the A2A Protocol | 🔜 |
-| 07 | Building Multi-Agent Systems with LangGraph | 🔜 |
-| 08 | Human-in-the-Loop and Bounded Autonomy | 🔜 |
-| 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | 🔜 |
-| 10 | Computer-Use and Browser Agents | 🔜 |
+| 01 | Agent Architecture Deep Dive — From Assistants to Autonomous Systems | ✅ Complete |
+| 02 | Reasoning and Planning Patterns — ReAct, Plan-and-Execute, and Reflection | ✅ Complete |
+| 03 | Tool Use and Function Calling at Scale | ✅ Complete |
+| 04 | Agent Memory Systems — Working, Long-Term, and Episodic Memory | ✅ Complete |
+| 05 | Multi-Agent Orchestration Patterns | ✅ Complete |
+| 06 | Agent-to-Agent Communication and the A2A Protocol | ✅ Complete |
+| 07 | Building Multi-Agent Systems with LangGraph | ✅ Complete |
+| 08 | Human-in-the-Loop and Bounded Autonomy | ✅ Complete |
+| 09 | Building Agents with the Claude Agent SDK — Subagents, Hooks, and Skills | ✅ Complete |
+| 10 | Computer-Use and Browser Agents | 🔜 Next |
 | 11 | Agentic RAG Revisited — Retrieval as a Tool for Autonomous Agents | 🔜 |
 | 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | 🔜 |
 | 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | 🔜 |
