@@ -275,7 +275,7 @@ Chapter 15 is the Capstone — a synthesis chapter, not a new-topic chapter — 
 
 ## Possible Future Additions (Not Yet Scoped)
 
-- A dedicated reference doc comparing agent sandboxing services (Vercel Sandbox, E2B, Modal, Firecracker-based options directly) once Chapter 13's research is verified.
+- ~~A dedicated reference doc comparing agent sandboxing services~~ — done: `reference/09-agent-sandboxing-comparison.md`, covering E2B, Vercel Sandbox, Daytona, and Modal, verified 2026-07-11.
 - Coverage of agent fine-tuning for tool selection specifically, if it matures beyond research-stage during this volume's writing (flagged as a "Volume 3 or 5" consideration in Volume 2's own roadmap — confirm whether it belongs here instead).
 
 ---

@@ -2,7 +2,7 @@
 
 Quick-lookup reference docs for Agent Engineering. These are designed to be open in a second tab while you build — not for learning from scratch, but for looking things up without leaving your editor.
 
-Populated as the corresponding chapters are written. Docs 01–06 exist and are current as of 2026-07-11. Docs 07–10 are not yet written, even though their corresponding chapters (12, 13, 10/13, 14) are complete — this is a known gap, not an indication those chapters don't exist.
+All 10 documents exist and are current as of 2026-07-11.
 
 ---
 
