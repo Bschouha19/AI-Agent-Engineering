@@ -13,7 +13,7 @@
 
 ## Progress
 
-**14 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11. Chapter 14 completed 2026-07-11.
+**15 of 15 chapters complete — Volume 4 is finished.** Volume 4 kicked off 2026-07-11 and completed 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11. Chapter 14 completed 2026-07-11. Chapter 15 completed 2026-07-11.
 
 ---
 
@@ -96,7 +96,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 | # | Chapter | File | Status | Key Skills |
 |---|---------|------|--------|-----------|
-| 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | chapters/chapter-15-capstone.md | 🔜 Next | All of Volume 4: reasoning, memory, multi-agent orchestration, human oversight, evaluation, security, fleet operations |
+| 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | chapters/chapter-15-capstone.md | ✅ Complete | All of Volume 4: reasoning, memory, multi-agent orchestration, human oversight, evaluation, security, fleet operations |
 
 **Capstone System:** A production multi-agent system — an orchestrator coordinating specialized worker agents, at least one agent with genuinely consequential real-world capability, agent-to-agent communication, persistent memory, a risk-tiered human approval layer, a trajectory-level evaluation harness, and fleet-level operational monitoring. Explicitly designed so a reader can substitute their own domain (customer support automation, DevOps automation, research automation) with no conceptual gap.
 
@@ -141,4 +141,4 @@ Takes approximately 2–3 weeks part-time.
 
 ---
 
-*Last updated: 2026-07-11 — 0 of 15 chapters complete. Kickoff session.*
+*Last updated: 2026-07-11 — 15 of 15 chapters complete. Volume 4 finished.*

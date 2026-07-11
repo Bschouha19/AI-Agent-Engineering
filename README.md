@@ -59,7 +59,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 
 ## Progress
 
-**14 of 15 chapters complete** — Volume 4 kicked off 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11. Chapter 14 completed 2026-07-11.
+**15 of 15 chapters complete — Volume 4 is finished.** Volume 4 kicked off 2026-07-11 and completed 2026-07-11. Chapter 01 completed 2026-07-11. Chapter 02 completed 2026-07-11. Chapter 03 completed 2026-07-11. Chapter 04 completed 2026-07-11. Chapter 05 completed 2026-07-11. Chapter 06 completed 2026-07-11. Chapter 07 completed 2026-07-11. Chapter 08 completed 2026-07-11. Chapter 09 completed 2026-07-11. Chapter 10 completed 2026-07-11. Chapter 11 completed 2026-07-11. Chapter 12 completed 2026-07-11. Chapter 13 completed 2026-07-11. Chapter 14 completed 2026-07-11. Chapter 15 completed 2026-07-11.
 
 | Module | Chapters | Status |
 |--------|----------|--------|
@@ -67,7 +67,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | 2 — Multi-Agent Engineering | Ch 05–08 | ✅ Complete |
 | 3 — Specialized and Production Agent Capabilities | Ch 09–11 | ✅ Complete |
 | 4 — Trustworthy, Evaluated, Production-Grade Agents | Ch 12–14 | ✅ Complete |
-| 5 — Capstone | Ch 15 | 🔜 Not started |
+| 5 — Capstone | Ch 15 | ✅ Complete |
 
 ### Chapter-by-Chapter
 
@@ -87,7 +87,7 @@ This course escalates stakes by **autonomy and blast radius**, not document doma
 | 12 | Agent Evaluation — Trajectory Analysis and Task Success Metrics | ✅ Complete |
 | 13 | Agent Security — Bounding Autonomy and Defending Against Excessive Agency | ✅ Complete |
 | 14 | Production Agent Operations at Scale | ✅ Complete |
-| 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | 🔜 Next |
+| 15 | Capstone — Production Multi-Agent System with Bounded Autonomy | ✅ Complete |
 
 See [COURSE_INDEX.md](./COURSE_INDEX.md) for learning goals and the full chapter dependency map.
 
@@ -118,7 +118,7 @@ Every reference document is open-in-second-tab material — built for lookup, no
 | 1 | AI Engineering — From Zero to Production | ✅ Complete (20 chapters) | [AI-Engineering-Handbook](https://github.com/Bschouha19/AI-Engineering-Handbook) |
 | 2 | MCP Engineering | ✅ Complete (15 chapters) | [MCP-Engineering](https://github.com/Bschouha19/MCP-Engineering) |
 | 3 | RAG Deep Dive | ✅ Complete (15 chapters) | [RAG-Deep-Dive](https://github.com/Bschouha19/RAG-Deep-Dive) |
-| 4 | AI Agent Engineering | 🔄 In Progress | [AI-Agent-Engineering](https://github.com/Bschouha19/AI-Agent-Engineering) |
+| 4 | AI Agent Engineering | ✅ Complete (15 chapters) | [AI-Agent-Engineering](https://github.com/Bschouha19/AI-Agent-Engineering) |
 | 5 | n8n AI Workflow Automation | 🔜 Planned | — |
 | 6 | Vector Database Engineering | 🔜 Planned | — |
 | 7 | Coding Agents | 🔜 Planned | — |
@@ -130,4 +130,4 @@ Every reference document is open-in-second-tab material — built for lookup, no
 
 ---
 
-*Volume 4 started July 2026. Target: 15 chapters.*
+*Volume 4 started and completed July 2026. 15 of 15 chapters delivered.*
